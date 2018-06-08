@@ -45,7 +45,7 @@ read64(const void *src) {
 }
 
 static inline uint64_t
-reduce64(const uint64_t a, const uint64_t b) {
+reduce64(uint64_t a, uint64_t b) {
 #if defined(__GNUC__)
   return ((uint128_t)a * b) >> 64;
 #elif defined(_MSC_VER)
@@ -73,15 +73,15 @@ _siphash(
   size_t len,
   const uint8_t *key
 ) {
-  const uint32_t blocks = len >> 3;
-  const uint64_t c0 = 0x736f6d6570736575ull;
-  const uint64_t c1 = 0x646f72616e646f6dull;
-  const uint64_t c2 = 0x6c7967656e657261ull;
-  const uint64_t c3 = 0x7465646279746573ull;
+  uint32_t blocks = len >> 3;
+  uint64_t c0 = 0x736f6d6570736575ull;
+  uint64_t c1 = 0x646f72616e646f6dull;
+  uint64_t c2 = 0x6c7967656e657261ull;
+  uint64_t c3 = 0x7465646279746573ull;
   uint64_t f0 = (uint64_t)len << 56;
-  const uint64_t f1 = 0xff;
-  const uint64_t k0 = read64(key);
-  const uint64_t k1 = read64(key + 8);
+  uint64_t f1 = 0xff;
+  uint64_t k0 = read64(key);
+  uint64_t k1 = read64(key + 8);
 
   uint64_t v0 = k0 ^ c0;
   uint64_t v1 = k1 ^ c1;
@@ -134,15 +134,15 @@ _siphash(
 }
 
 static uint64_t
-_siphash64(const uint64_t num, const uint8_t *key) {
-  const uint64_t c0 = 0x736f6d6570736575ull;
-  const uint64_t c1 = 0x646f72616e646f6dull;
-  const uint64_t c2 = 0x6c7967656e657261ull;
-  const uint64_t c3 = 0x7465646279746573ull;
-  const uint64_t f0 = num;
-  const uint64_t f1 = 0xff;
-  const uint64_t k0 = read64(key);
-  const uint64_t k1 = read64(key + 8);
+_siphash64(uint64_t num, const uint8_t *key) {
+  uint64_t c0 = 0x736f6d6570736575ull;
+  uint64_t c1 = 0x646f72616e646f6dull;
+  uint64_t c2 = 0x6c7967656e657261ull;
+  uint64_t c3 = 0x7465646279746573ull;
+  uint64_t f0 = num;
+  uint64_t f1 = 0xff;
+  uint64_t k0 = read64(key);
+  uint64_t k1 = read64(key + 8);
 
   uint64_t v0 = k0 ^ c0;
   uint64_t v1 = k1 ^ c1;
@@ -166,13 +166,13 @@ _siphash64(const uint64_t num, const uint8_t *key) {
 }
 
 static uint64_t
-_siphash64k256(const uint64_t num, const uint8_t *key) {
-  const uint64_t f0 = num;
-  const uint64_t f1 = 0xff;
-  const uint64_t k0 = read64(key);
-  const uint64_t k1 = read64(key + 8);
-  const uint64_t k2 = read64(key + 16);
-  const uint64_t k3 = read64(key + 24);
+_siphash64k256(uint64_t num, const uint8_t *key) {
+  uint64_t f0 = num;
+  uint64_t f1 = 0xff;
+  uint64_t k0 = read64(key);
+  uint64_t k1 = read64(key + 8);
+  uint64_t k2 = read64(key + 16);
+  uint64_t k3 = read64(key + 24);
 
   uint64_t v0 = k0;
   uint64_t v1 = k1;
@@ -201,22 +201,22 @@ bsip_siphash(const uint8_t *data, size_t len, const uint8_t *key) {
 }
 
 uint32_t
-bsip_siphash32(const uint32_t num, const uint8_t *key) {
-  return _siphash64((const uint64_t)num, key);
+bsip_siphash32(uint32_t num, const uint8_t *key) {
+  return _siphash64((uint64_t)num, key);
 }
 
 uint64_t
-bsip_siphash64(const uint64_t num, const uint8_t *key) {
+bsip_siphash64(uint64_t num, const uint8_t *key) {
   return _siphash64(num, key);
 }
 
 uint32_t
-bsip_siphash32k256(const uint32_t num, const uint8_t *key) {
-  return _siphash64k256((const uint64_t)num, key);
+bsip_siphash32k256(uint32_t num, const uint8_t *key) {
+  return _siphash64k256((uint64_t)num, key);
 }
 
 uint64_t
-bsip_siphash64k256(const uint64_t num, const uint8_t *key) {
+bsip_siphash64k256(uint64_t num, const uint8_t *key) {
   return _siphash64k256(num, key);
 }
 
@@ -225,7 +225,7 @@ bsip_sipmod(
   const uint8_t *data,
   size_t len,
   const uint8_t *key,
-  const uint64_t m
+  uint64_t m
 ) {
   uint64_t v = _siphash(data, len, key);
   return reduce64(v, m);
