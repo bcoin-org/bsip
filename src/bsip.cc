@@ -56,7 +56,7 @@ NAN_METHOD(siphash32) {
   if (!node::Buffer::HasInstance(kbuf))
     return Nan::ThrowTypeError("Second argument must be a buffer.");
 
-  uint32_t num = info[0]->Uint32Value();
+  uint32_t num = Nan::To<uint32_t>(info[0]).FromJust();
 
   const uint8_t *kdata = (const uint8_t *)node::Buffer::Data(kbuf);
   size_t klen = node::Buffer::Length(kbuf);
@@ -84,8 +84,8 @@ NAN_METHOD(siphash64) {
   if (!node::Buffer::HasInstance(kbuf))
     return Nan::ThrowTypeError("Third argument must be a buffer.");
 
-  uint32_t hi = info[0]->Uint32Value();
-  uint32_t lo = info[1]->Uint32Value();
+  uint32_t hi = Nan::To<uint32_t>(info[0]).FromJust();
+  uint32_t lo = Nan::To<uint32_t>(info[1]).FromJust();
   uint64_t num = ((uint64_t)hi << 32) | lo;
 
   const uint8_t *kdata = (const uint8_t *)node::Buffer::Data(kbuf);
@@ -115,7 +115,7 @@ NAN_METHOD(siphash32k256) {
   if (!node::Buffer::HasInstance(kbuf))
     return Nan::ThrowTypeError("Second argument must be a buffer.");
 
-  uint32_t num = info[0]->Uint32Value();
+  uint32_t num = Nan::To<uint32_t>(info[0]).FromJust();
 
   const uint8_t *kdata = (const uint8_t *)node::Buffer::Data(kbuf);
   size_t klen = node::Buffer::Length(kbuf);
@@ -143,8 +143,8 @@ NAN_METHOD(siphash64k256) {
   if (!node::Buffer::HasInstance(kbuf))
     return Nan::ThrowTypeError("Third argument must be a buffer.");
 
-  uint32_t hi = info[0]->Uint32Value();
-  uint32_t lo = info[1]->Uint32Value();
+  uint32_t hi = Nan::To<uint32_t>(info[0]).FromJust();
+  uint32_t lo = Nan::To<uint32_t>(info[1]).FromJust();
   uint64_t num = ((uint64_t)hi << 32) | lo;
 
   const uint8_t *kdata = (const uint8_t *)node::Buffer::Data(kbuf);
@@ -191,8 +191,8 @@ NAN_METHOD(sipmod) {
   if (klen < 16)
     return Nan::ThrowError("Bad key size for siphash.");
 
-  const uint32_t mhi = info[2]->Uint32Value();
-  const uint32_t mlo = info[3]->Uint32Value();
+  const uint32_t mhi = Nan::To<uint32_t>(info[2]).FromJust();
+  const uint32_t mlo = Nan::To<uint32_t>(info[3]).FromJust();
   const uint64_t m = ((uint64_t)mhi << 32) | mlo;
 
   uint64_t result = bsip_sipmod(data, len, kdata, m);
