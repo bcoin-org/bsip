@@ -214,4 +214,4 @@ NAN_MODULE_INIT(init) {
   Nan::Export(target, "sipmod", sipmod);
 }
 
-NODE_MODULE(bsip, init)
+NAN_MODULE_WORKER_ENABLED(bsip, init)
