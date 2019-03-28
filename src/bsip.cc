@@ -214,4 +214,8 @@ NAN_MODULE_INIT(init) {
   Nan::Export(target, "sipmod", sipmod);
 }
 
+#if NODE_MAJOR_VERSION >= 10
 NAN_MODULE_WORKER_ENABLED(bsip, init)
+#else
+NODE_MODULE(bsip, init)
+#endif
