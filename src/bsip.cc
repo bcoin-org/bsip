@@ -38,8 +38,8 @@ NAN_METHOD(siphash) {
   uint64_t result = bsip_siphash(data, len, kdata);
 
   v8::Local<v8::Array> ret = Nan::New<v8::Array>();
-  ret->Set(0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
-  ret->Set(1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
+  Nan::Set(ret, 0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
+  Nan::Set(ret, 1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
 
   info.GetReturnValue().Set(ret);
 }
@@ -97,8 +97,8 @@ NAN_METHOD(siphash64) {
   uint64_t result = bsip_siphash64(num, kdata);
 
   v8::Local<v8::Array> ret = Nan::New<v8::Array>();
-  ret->Set(0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
-  ret->Set(1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
+  Nan::Set(ret, 0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
+  Nan::Set(ret, 1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
 
   info.GetReturnValue().Set(ret);
 }
@@ -156,8 +156,8 @@ NAN_METHOD(siphash64k256) {
   uint64_t result = bsip_siphash64k256(num, kdata);
 
   v8::Local<v8::Array> ret = Nan::New<v8::Array>();
-  ret->Set(0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
-  ret->Set(1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
+  Nan::Set(ret, 0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
+  Nan::Set(ret, 1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
 
   info.GetReturnValue().Set(ret);
 }
@@ -198,8 +198,8 @@ NAN_METHOD(sipmod) {
   uint64_t result = bsip_sipmod(data, len, kdata, m);
 
   v8::Local<v8::Array> ret = Nan::New<v8::Array>();
-  ret->Set(0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
-  ret->Set(1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
+  Nan::Set(ret, 0, Nan::New<v8::Int32>((int32_t)(result >> 32)));
+  Nan::Set(ret, 1, Nan::New<v8::Int32>((int32_t)(result & 0xffffffff)));
 
   info.GetReturnValue().Set(ret);
 }
