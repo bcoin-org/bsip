@@ -1,6 +1,6 @@
 {
   "name": "bsip",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Siphash 2-4 and all its variations for javascript",
   "keywords": [
     "crypto",
